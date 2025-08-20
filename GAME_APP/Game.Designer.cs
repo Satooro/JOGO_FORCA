@@ -34,11 +34,16 @@
             this.BTNJogar = new System.Windows.Forms.Button();
             this.PNPalavra = new System.Windows.Forms.Panel();
             this.LBDica = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.PBBoneco = new System.Windows.Forms.PictureBox();
             this.PNLetra.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PBBoneco)).BeginInit();
             this.SuspendLayout();
             // 
             // PNLetra
             // 
+            this.PNLetra.BackColor = System.Drawing.Color.Transparent;
             this.PNLetra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PNLetra.Controls.Add(this.TXTLetra);
             this.PNLetra.Controls.Add(this.label1);
@@ -78,18 +83,19 @@
             // 
             // BTNJogar
             // 
+            this.BTNJogar.BackColor = System.Drawing.Color.Transparent;
             this.BTNJogar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BTNJogar.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BTNJogar.Location = new System.Drawing.Point(54, 227);
             this.BTNJogar.Name = "BTNJogar";
             this.BTNJogar.Size = new System.Drawing.Size(303, 67);
             this.BTNJogar.TabIndex = 1;
-            this.BTNJogar.Text = "Jogar";
-            this.BTNJogar.UseVisualStyleBackColor = true;
-            this.BTNJogar.Click += new System.EventHandler(this.BTNJogar_Click);
+            this.BTNJogar.Text = "JOGAR";
+            this.BTNJogar.UseVisualStyleBackColor = false;
             // 
             // PNPalavra
             // 
+            this.PNPalavra.BackColor = System.Drawing.Color.Transparent;
             this.PNPalavra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PNPalavra.Location = new System.Drawing.Point(411, 65);
             this.PNPalavra.Name = "PNPalavra";
@@ -98,19 +104,45 @@
             // 
             // LBDica
             // 
+            this.LBDica.BackColor = System.Drawing.Color.Transparent;
             this.LBDica.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LBDica.Location = new System.Drawing.Point(411, 24);
             this.LBDica.Name = "LBDica";
-            this.LBDica.Size = new System.Drawing.Size(510, 38);
+            this.LBDica.Size = new System.Drawing.Size(765, 38);
             this.LBDica.TabIndex = 3;
             this.LBDica.Text = "DICA DA PALAVRA:";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Image = global::GAME_APP.Properties.Resources.cadafalso;
+            this.pictureBox1.Location = new System.Drawing.Point(14, 370);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(359, 343);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
+            // 
+            // PBBoneco
+            // 
+            this.PBBoneco.BackColor = System.Drawing.Color.Transparent;
+            this.PBBoneco.Location = new System.Drawing.Point(191, 428);
+            this.PBBoneco.Name = "PBBoneco";
+            this.PBBoneco.Size = new System.Drawing.Size(166, 257);
+            this.PBBoneco.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PBBoneco.TabIndex = 5;
+            this.PBBoneco.TabStop = false;
             // 
             // Game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(933, 357);
+            this.BackgroundImage = global::GAME_APP.Properties.Resources.background;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(1207, 763);
+            this.Controls.Add(this.PBBoneco);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.LBDica);
             this.Controls.Add(this.PNPalavra);
             this.Controls.Add(this.BTNJogar);
@@ -122,10 +154,13 @@
             this.MaximizeBox = false;
             this.Name = "Game";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Jogo da Forca";
             this.Load += new System.EventHandler(this.Game_Load);
             this.PNLetra.ResumeLayout(false);
             this.PNLetra.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PBBoneco)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -138,6 +173,8 @@
         private System.Windows.Forms.Button BTNJogar;
         private System.Windows.Forms.Panel PNPalavra;
         private System.Windows.Forms.Label LBDica;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox PBBoneco;
     }
 }
 

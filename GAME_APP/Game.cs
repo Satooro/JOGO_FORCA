@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,6 +16,7 @@ namespace GAME_APP
 
         Forca jogo;
         Label[] Letras;
+        int tentativas = 0;
 
         public readonly List<string> Palavras = new List<string>()
         {
@@ -37,19 +39,30 @@ namespace GAME_APP
 
         private void TXTLetra_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //if (!char.IsLetter(e.KeyChar) || char.is)
-            //{
-            //    e.Handled = true;
-            //}
+            string letra = TXTLetra.Text.ToUpper();
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true;
+            }
+            if(e.KeyChar == 13 && letra.Length == 1) {
+                DesenharLetra(letra);
+                TXTLetra.Clear();
+                TXTLetra.Focus();
+            }
         }
 
         private void Game_Load(object sender, EventArgs e)
         {
+            musica = new SoundPlayer();
+            musica.SoundLocation = "background-music.wav";
+            musica.PlayLooping();
             NovoJogo();
         }
 
         private void NovoJogo()
         {
+            tentativas = 0;
+            PBBoneco.Image = null;
             jogo = new Forca(Palavras, Dicas);
             jogo.Sortear();
             LBDica.Text = $"Dica: {jogo.Dicas[jogo.Pos]}";
@@ -68,7 +81,7 @@ namespace GAME_APP
                 Letras[i].Width = 50;
                 Letras[i].Height = Letras[i].Width;
                 Letras[i].ForeColor = Color.White;
-                Letras[i].BackColor = Color.Azure;
+                Letras[i].BackColor = Color.Black;
                 Letras[i].AutoSize = false;
                 Letras[i].TextAlign = ContentAlignment.MiddleCenter;
                 Letras[i].BorderStyle = BorderStyle.FixedSingle;
@@ -88,21 +101,64 @@ namespace GAME_APP
         private void BTNJogar_Click(object sender, EventArgs e)
         {
             string letra = TXTLetra.Text.ToUpper();
-            DesenharLetra(letra);
-            TXTLetra.Clear();
-            TXTLetra.Focus();
+            if (letra.Length == 1)
+            {
+                DesenharLetra(letra);
+                TXTLetra.Clear();
+                TXTLetra.Focus();
+            }
         }
 
         private void DesenharLetra(string letra)
         {
             string palavra = jogo.Palavras[jogo.Pos];
-            for (int i = 0; i < letra.Length; i++)
+            bool achou = false;
+            for (int i = 0; i < palavra.Length; i++)
             {
                 if (palavra.Substring(i,1) == letra)
                 {
                     Letras[i].Text = letra;
+                    achou = true;
                 }
             }
+            if (!achou)
+            {
+                DesenharBoneco();
+            }
+            if(tentativas == 6)
+            {
+                Derrota();
+            }
+            Vitoria();
         }
+
+        private void Vitoria()
+        {
+            string palavra = jogo.Palavras[jogo.Pos];
+            string temp = "";
+            foreach(Label letra in Letras)
+            {
+                temp += letra.Text;
+            }
+            if(temp == palavra)
+            {
+                MessageBox.Show($"Você venceu! A palavra era {palavra}");
+                NovoJogo();
+            }
+        }
+
+        private void Derrota()
+        {
+            MessageBox.Show($"Você perdeu! A palavra era {jogo.Palavras[jogo.Pos]}");
+            NovoJogo();
+        }
+
+        private void DesenharBoneco()
+        {
+            tentativas++;
+            string image = $"FORCA{tentativas}.png";
+            PBBoneco.Image = Image.FromFile(image);
+        }
+        SoundPlayer musica;
     }
 }
